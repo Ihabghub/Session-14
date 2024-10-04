@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item Entry Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            
+        }
+        .form-container {
+            max-width: 450px;
+            margin: auto;
+            padding: 30px;
+            border: 1px solid #ccc;
+            border: none;
+            box-shadow: 2px 2px 12px #aaa;
+            position: relative; /* For positioning the exit button */
+            border-radius: 50px;
+            background-color: black;
+            color: white;
+        }
+        .exit-button {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 50%; /* Makes the button circular */
+            width: 40px;
+            height: 40px;
+            position: absolute; /* Positioning relative to the form */
+            top: 20px; /* Position from the top */
+            right: 20px; /* Position from the right */
+        }
+        .exit-button:hover {
+            background-color: #d32f2f;
+        }
+        .input-label {
+            margin-top: 10px;
+            display: block;
+        }
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border: none;
+            background-color: gray;
+        }
+        .input-row {
+            display: flex;
+            
+            margin-bottom: 10px;
+            margin-right: 30px;
+            gap: 35px;
+        }
+        .input-row .input-field {
+            flex: 1;
+            margin-right: 10px;
+        }
+        .input-row .image-button {
+            margin-left: 10px;
+        }
+        .image-button {
+            background-color: gray;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            flex-basis: 30%; /* Adjust button width */
+            width: 175px;
+            height: 35px;
+            margin-right: 20px;
+        }
+        .image-button:hover {
+            background-color: #565d63;
+        }
+        .add-button{
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 30%;
+            margin-top: 20px; /* Spacing from other elements */
+            margin-left: 300px;
+        }
+        .add-button:hover {
+            background-color: #45a049;
+        }
+        ul {
+            margin-top: 20px;
+            padding: 0;
+        }
+        li {
+            list-style-type: none;
+            margin-bottom: 10px;
+            border: 1px solid #eee;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        img {
+            max-width: 100px; /* Limit the image size */
+        }
+        #itemDetails{
+            width: 420px;
+        }
+        #category{
+            width: 190px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <button class="exit-button" onclick="exitForm()">✖</button>
+        <h1>Add Item</h1>
+        
+        <div class="input-row">
+            <div>
+                <label class="input-label" for="category">Category</label>
+                <input type="text" class="input-field" id="category" placeholder="Enter category">
+            </div>
+            <div>
+                <label class="input-label">Add Image</label>
+                <button class="image-button" onclick="document.getElementById('imageUpload').click()">Add Image</button>
+                <input type="file" id="imageUpload" style="display: none;" accept="image/*" onchange="previewImage(event)">
+            </div>
+        </div>
+        
+        <div class="input-row">
+            <div>
+                <label class="input-label" for="itemName">Item Name</label>
+                <input type="text" class="input-field" id="itemName" placeholder="Enter item name">
+            </div>
+            <div>
+                <label class="input-label" for="itemPrice">Item Price</label>
+                <input type="text" class="input-field" id="itemPrice" placeholder="Enter item price">
+            </div>
+        </div>
+        
+        <label class="input-label" for="itemDetails">Item Details</label>
+        <textarea class="input-field" id="itemDetails" placeholder="Enter item details" rows="3"></textarea>
+        
+        <button class="add-button" onclick="addItem()">Add Item</button>
+        
+        <ul id="itemList"></ul>
+    </div>
+
+    <script>
+        let imageSrc = '';
+
+        function previewImage(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    imageSrc = e.target.result; // Store the image source
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function addItem() {
+            const category = document.getElementById('category').value.trim();
+            const itemName = document.getElementById('itemName').value.trim();
+            const itemPrice = document.getElementById('itemPrice').value.trim();
+            const itemDetails = document.getElementById('itemDetails').value.trim();
+
+            if (itemName) {
+                const itemList = document.getElementById('itemList');
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `<strong>${itemName}</strong> (${category}) - $${itemPrice}<br><img src="${imageSrc}" alt="${itemName}"><br>${itemDetails}`;
+                itemList.appendChild(listItem);
+                
+                // Clear input fields
+                document.getElementById('category').value = '';
+                document.getElementById('imageUpload').value = '';
+                document.getElementById('itemName').value = '';
+                document.getElementById('itemPrice').value = '';
+                document.getElementById('itemDetails').value = '';
+                imageSrc = ''; // Reset the image source
+            }
+        }
+
+        function exitForm() {
+            if (confirm('Are you sure you want to exit?')) {
+                window.close(); // This will work only in certain scenarios, like if the window was opened by a script.
+            }
+        }
+    </script>
+
+
+</body>
+</html>
