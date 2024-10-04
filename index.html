@@ -30,12 +30,12 @@
             border: none;
             padding: 10px;
             cursor: pointer;
-            border-radius: 50%; /* Makes the button circular */
+            border-radius: 50%; 
             width: 40px;
             height: 40px;
-            position: absolute; /* Positioning relative to the form */
-            top: 20px; /* Position from the top */
-            right: 20px; /* Position from the right */
+            position: absolute; 
+            top: 20px; 
+            right: 20px; 
         }
         .exit-button:hover {
             background-color: #d32f2f;
@@ -73,7 +73,7 @@
             padding: 10px;
             cursor: pointer;
             border-radius: 5px;
-            flex-basis: 30%; /* Adjust button width */
+            flex-basis: 30%; 
             width: 175px;
             height: 35px;
             margin-right: 20px;
@@ -154,47 +154,10 @@
         <ul id="itemList"></ul>
     </div>
 
+
+
     <script>
-        let imageSrc = '';
-
-        function previewImage(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    imageSrc = e.target.result; // Store the image source
-                }
-                reader.readAsDataURL(file);
-            }
-        }
-
-        function addItem() {
-            const category = document.getElementById('category').value.trim();
-            const itemName = document.getElementById('itemName').value.trim();
-            const itemPrice = document.getElementById('itemPrice').value.trim();
-            const itemDetails = document.getElementById('itemDetails').value.trim();
-
-            if (itemName) {
-                const itemList = document.getElementById('itemList');
-                const listItem = document.createElement('li');
-                listItem.innerHTML = `<strong>${itemName}</strong> (${category}) - $${itemPrice}<br><img src="${imageSrc}" alt="${itemName}"><br>${itemDetails}`;
-                itemList.appendChild(listItem);
-                
-                // Clear input fields
-                document.getElementById('category').value = '';
-                document.getElementById('imageUpload').value = '';
-                document.getElementById('itemName').value = '';
-                document.getElementById('itemPrice').value = '';
-                document.getElementById('itemDetails').value = '';
-                imageSrc = ''; // Reset the image source
-            }
-        }
-
-        function exitForm() {
-            if (confirm('Are you sure you want to exit?')) {
-                window.close(); // This will work only in certain scenarios, like if the window was opened by a script.
-            }
-        }
+       
     </script>
 
 
