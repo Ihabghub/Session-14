@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="menu-container">
+        <h1 class="menu-title">Our Menu</h1>
+
+        <!-- Drinks -->
+        <section class="menu-section" id="drinks-form">
+            <h2 class="section-title">Drinks</h2>
+            <button type="button" onclick="plusButtonDrinks()">+</button>
+            <ul class="menu-items">
+                <li class="menu-item">
+                    <span class="item-image"></span>
+                        <img src="./coffe-mug.jpg" alt="">
+                    </span>
+                    <span class="item-name">Espresso</span>
+                    <span class="item-price">$2.50</span>
+                </li>
+                <li class="menu-item">
+                    <span class="item-image"></span>
+                        <img src="./coffe-mug.jpg" alt="">
+                    </span>
+                    <span class="item-name">Latte</span>
+                    <span class="item-price">$3.50</span>
+                </li>
+                <li class="menu-item">
+                    <span class="item-image"></span>
+                        <img src="./coffe-mug.jpg" alt="">
+                    </span>
+                    <span class="item-name">Iced <br> Coffee</span>
+                    <span class="item-price">$3.00</span>
+                    
+                </li>
+                <li class="menu-item">
+                    <span class="item-image"></span>
+                        <img src="./coffe-mug.jpg" alt="">
+                    </span>
+                    <span class="item-name">Green <br> Tea</span>
+                    <span class="item-price">$2.00</span>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Sandwiches -->
+        <section class="menu-section" id="sandwiches-form">
+            <h2 class="section-title" onclick="sandwichesClicked()">Sandwiches</h2>
+            <button type="button" onclick="plusButtonSandwiches()">+</button>
+            <ul class="menu-items">
+                <li class="menu-item">
+                    <span class="item-image"></span>
+                        <img src="./coffe-mug.jpg" alt="">
+                    </span>
+                    <span class="item-name">Chicken <br> Sandwich</span>
+                    <span class="item-price">$6.00</span>
+                </li>
+                <li class="menu-item">
+                    <span class="item-image"></span>
+                        <img src="./coffe-mug.jpg" alt="">
+                    </span>
+                    <span class="item-name">Veggie <br> Sandwich</span>
+                    <span class="item-price">$5.50</span>
+                </li>
+                <li class="menu-item">
+                    <span class="item-image"></span>
+                        <img src="./coffe-mug.jpg" alt="">
+                    </span>
+                    <span class="item-name">BLT</span>
+                    <span class="item-price">$6.50</span>
+                </li>
+                <li class="menu-item">
+                    <span class="item-image"></span>
+                        <img src="./coffe-mug.jpg" alt="">
+                    </span>
+                    <span class="item-name">Club <br> Sandwich</span>
+                    <span class="item-price">$7.00</span>
+                </li>
+            </ul>
+        </section>
+
+        <section class="add-item-form hidden" id="add-item">
+            <button class="exit-button" onclick="exitForm()">✖</button>
+            <h1>Add Item</h1>
+            
+            <div class="input-row">
+                <div>
+                    <label class="input-label" for="category">Category</label>
+                    <input type="text" class="input-field" id="category" placeholder="Enter category">
+                </div>
+                <div class="image-upload-div">
+                        <input type="file" id="image-upload" name="imageUpload" onclick="addImage()">
+                </div>
+            </div>
+            
+            <div class="input-row">
+                <div>
+                    <label class="input-label" for="itemName">Item Name</label>
+                    <input type="text" class="input-field" id="itemName" placeholder="Enter item name">
+                </div>
+                <div>
+                    <label class="input-label" for="itemPrice">Item Price</label>
+                    <input type="text" class="input-field" id="itemPrice" placeholder="Enter item price">
+                </div>
+            </div>
+            
+            <label class="input-label" for="itemDetails">Item Details</label>
+            <textarea class="input-field" id="itemDetails" placeholder="Enter item details" rows="3"></textarea>
+            
+            <button class="add-button" onclick="addItem()">Add Item</button>
+            
+            <ul id="itemList"></ul>
+
+
+
+        </section>
+
+    <script>
+
+        let drinksForm = document.getElementById('drinks-form');
+        let sandwichesForm = document.getElementById('sandwiches-form');
+        let addItem = document.getElementById('add-item');
+        let addedImage = document.getElementById('image-upload')
+
+
+
+        function plusButtonDrinks(){
+            console.log('plusDrinksClicked!');
+            drinksForm.classList.add('hidden');
+            sandwichesForm.classList.add('hidden');
+            addItem.classList.remove('hidden');
+
+        }
+
+
+        function plusButtonSandwiches(){
+            console.log('plusSandwichesClicked!');
+            drinksForm.classList.add('hidden');
+            sandwichesForm.classList.add('hidden');
+            addItem.classList.remove('hidden');
+
+        }
+
+        function exitForm(){
+            console.log('ExitForm Clicked!');
+            drinksForm.classList.remove('hidden');
+            sandwichesForm.classList.remove('hidden');
+            addItem.classList.add('hidden');
+        }
+
+        function addImage(){
+            console.log(addedImage)
+        }
+
+    </script>
+
+    <style>
+
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f9f9f9;
+    padding: 20px;
+}
+
+.menu-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    position: relative;
+}
+
+.menu-title {
+    text-align: center;
+    font-size: 2em;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.menu-section {
+    margin-bottom: 30px;
+}
+
+.section-title {
+    font-size: 1.5em;
+    color: #555;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+.menu-items {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    padding: 30px;
+}
+
+.menu-item {
+    display: flex;
+    flex-direction: column;
+    align-items: space-between;
+    justify-content: space-between;
+    margin: 10px 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f0f0f0;
+    /* border: 1px grey solid; */
+    width: 150px;
+    /* height: 250px; */
+} 
+
+button {
+    background-color: red;
+    color: white;
+    cursor: pointer;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-left: 700px;
+  }
+
+  button:hover {
+    background-color: #45a049;
+  }
+
+.menu-item img{
+    width: 50px;
+    height: 50px;
+}
+
+.item-name {
+    font-size: 1.2em;
+    color: #333;
+}
+
+.item-price {
+    font-size: 1.2em;
+    color: #888;
+}
+
+.menu-container h2{
+    cursor: pointer 
+}
+
+.add-item-form {
+    max-width: 500px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 2px 2px 12px #aaa;
+    position: absolute;
+    background-color: #333;
+    border-radius: 20px;
+}
+
+.exit-button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 50%; 
+    width: 40px;
+    height: 40px;
+    position: absolute; 
+    top: 10px; 
+    right: 10px; 
+}
+.exit-button:hover {
+    background-color: #d32f2f;
+}
+.input-label {
+    margin-top: 10px;
+    display: block;
+}
+.input-field {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.input-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    gap: 10px;
+}
+.input-row .input-field {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.image-upload-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 200px;
+    height: 50px;
+    margin: 0;
+    margin-left: 250px; 
+}
+.add-button:hover {
+    background-color: #45a049;
+}
+
+ul {
+    margin-top: 20px;
+    padding: 0;
+}
+li {
+    list-style-type: none;
+    margin-bottom: 10px;
+    border: 1px solid #eee;
+    padding: 10px;
+    border-radius: 5px;
+}
+img {
+    max-width: 100px; 
+}
+
+.hidden{
+    display: none;
+}
+
+    </style>
+
+
+</body>
+</html>
