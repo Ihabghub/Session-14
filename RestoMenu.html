@@ -1,521 +1,210 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Menu</title>
-    <link rel="stylesheet" href="index.css" />
-  </head>
-  <body>
-    <div class="menu-container">
-      <h1 class="menu-title">Our Menu</h1>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-5">
+    <div class="max-w-3xl mx-auto p-10 bg-white shadow-xl rounded-lg">
+        <h1 class="text-4xl font-bold text-center text-brown-900 mb-8">Our Menu</h1>
 
-      <!-- Drinks -->
-      <section class="menu-section" id="drinks-form">
-        <h2 class="section-title">Espresso & Coffee</h2>
-        <button type="button" onclick="plusButtonDrinks()">+</button>
-        <ul class="menu-items" id="drinks-items"></ul>
-      </section>
+        <!-- Drinks -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold text-brown-900 border-b-2 border-gray-300 pb-2 mb-4">Espresso & Coffee</h2>
+            <button type="button" class="bg-black text-white rounded-full w-10 h-10 text-xl transition-transform transform hover:scale-110" onclick="plusButtonDrinks()">+</button>
+            <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-5" id="drinks-items"></ul>
+        </section>
 
-      <!-- Croissants -->
-      <!-- we can change sandwiches by croissant but it is not neccessary till now' -->
-      <section class="menu-section" id="sandwiches-form">
-        <h2 class="section-title">Croissant Delights</h2>
-        <button type="button" onclick="plusButtonSandwiches()">+</button>
-        <ul class="menu-items" id="sandwiches-items"></ul>
-      </section>
+        <!-- Croissants -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold text-brown-900 border-b-2 border-gray-300 pb-2 mb-4">Croissant Delights</h2>
+            <button type="button" class="bg-black text-white rounded-full w-10 h-10 text-xl transition-transform transform hover:scale-110" onclick="plusButtonSandwiches()">+</button>
+            <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-5" id="sandwiches-items"></ul>
+        </section>
 
-      <section class="add-item-form hidden" id="add-item">
-        <button class="exit-button" onclick="exitForm()">✖</button>
-        <h1>Add Item</h1>
+        <section class="hidden" id="add-item">
+            <button class="absolute top-4 right-4 text-white bg-red-600 rounded-full w-10 h-10 flex items-center justify-center transition-transform transform hover:scale-110" onclick="exitForm()">✖</button>
+            <h1 class="text-3xl font-bold mb-4">Add Item</h1>
 
-        <div class="input-row">
-          <div>
-            <label class="input-label" for="category">Category</label>
-            <input
-              type="text"
-              class="input-field"
-              id="category"
-              placeholder="Enter category (drinks or sandwiches)"
-            />
-          </div>
-          <div class="image-upload-div">
-            <label for="image-upload" class="custom-file-upload">
-              Add Items
-            </label>
-            <input type="file" id="image-upload" name="imageUpload"/>
-          </div>
-          
-        </div>
+            <div class="grid grid-cols-1 gap-4 mb-4">
+                <div>
+                    <label class="block text-gray-700">Category</label>
+                    <input type="text" class="w-full p-3 border rounded focus:outline-none focus:ring focus:ring-brown-500" id="category" placeholder="Enter category (drinks or sandwiches)" />
+                </div>
+                <div>
+                    <label class="block text-gray-700">Add Items</label>
+                    <input type="file" id="image-upload" name="imageUpload" class="hidden"/>
+                    <label for="image-upload" class="inline-block bg-gray-600 text-white px-4 py-2 rounded cursor-pointer hover:bg-gray-700">Upload Image</label>
+                </div>
+            </div>
 
-        <div class="input-row">
-          <div>
-            <label class="input-label" for="itemName">Item Name</label>
-            <input
-              type="text"
-              class="input-field"
-              id="itemName"
-              placeholder="Enter item name"
-            />
-          </div>
-          <div>
-            <label class="input-label" for="itemPrice">Item Price</label>
-            <input
-              type="text"
-              class="input-field"
-              id="itemPrice"
-              placeholder="Enter item price"
-            />
-          </div>
-        </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div>
+                    <label class="block text-gray-700">Item Name</label>
+                    <input type="text" class="w-full p-3 border rounded focus:outline-none focus:ring focus:ring-brown-500" id="itemName" placeholder="Enter item name" />
+                </div>
+                <div>
+                    <label class="block text-gray-700">Item Price</label>
+                    <input type="text" class="w-full p-3 border rounded focus:outline-none focus:ring focus:ring-brown-500" id="itemPrice" placeholder="Enter item price" />
+                </div>
+            </div>
 
-        <label class="input-label" for="itemDetails">Item Details</label>
-        <textarea
-          class="input-field"
-          id="itemDetails"
-          placeholder="Enter item details"
-          rows="3"
-        ></textarea>
+            <label class="block text-gray-700">Item Details</label>
+            <textarea class="w-full p-3 border rounded focus:outline-none focus:ring focus:ring-brown-500 mb-4" id="itemDetails" placeholder="Enter item details" rows="3"></textarea>
 
-        <button class="add-button" onclick="addItemButtonClicked()">
-          Add Item
-        </button>
-      </section>
+            <button class="bg-black text-white px-6 py-2 rounded shadow transition-transform transform hover:scale-105 hover:shadow-lg" onclick="addItemButtonClicked()">Add Item</button>
+        </section>
     </div>
+
     <script>
-      let drinksForm = document.getElementById("drinks-form");
-      let sandwichesForm = document.getElementById("sandwiches-form");
-      let addItem = document.getElementById("add-item");
-      let addedImage = document.getElementById("image-upload");
+        // Your existing JavaScript code remains unchanged
+        let drinksForm = document.getElementById("drinks-form");
+        let sandwichesForm = document.getElementById("sandwiches-form");
+        let addItem = document.getElementById("add-item");
+        let addedImage = document.getElementById("image-upload");
 
-      let addedCategory = document.getElementById("category");
-      let addedItemPrice = document.getElementById("itemPrice");
-      let addedItemName = document.getElementById("itemName");
-      let addedItemDetails = document.getElementById("itemDetails");
+        let addedCategory = document.getElementById("category");
+        let addedItemPrice = document.getElementById("itemPrice");
+        let addedItemName = document.getElementById("itemName");
+        let addedItemDetails = document.getElementById("itemDetails");
 
-      let drinksArray = [
-        {
-          image: "pexels-chevanon-312418.jpg",
-          name: "Espresso",
-          price: "2.50",
-          details: "Strong, rich coffee",
-        },
-        {
-          image: "pexels-chevanon-302891.jpg",
-          name: "Latte",
-          price: "3.50",
-          details: "Smooth coffee with milk",
-        },
-        {
-          image: "icecoffee.jpg",
-          name: "Iced Coffee",
-          price: "3.00",
-          details: "Chilled coffee with ice",
-        },
-      ];
+        let drinksArray = [
+            {
+                image: "pexels-chevanon-312418.jpg",
+                name: "Espresso",
+                price: "2.50",
+                details: "Strong, rich coffee",
+            },
+            {
+                image: "pexels-chevanon-302891.jpg",
+                name: "Latte",
+                price: "3.50",
+                details: "Smooth coffee with milk",
+            },
+            {
+                image: "icecoffee.jpg",
+                name: "Iced Coffee",
+                price: "3.00",
+                details: "Chilled coffee with ice",
+            },
+        ];
 
-      let sandwichesArray = [
-        {
-          image: "pexels-jamalyahyayev-14519311.jpg",
-          name: "Butter Croissant",
-          price: "3.50",
-          details: "Butter, flour, yeast, sugar, salt, and milk",
-        },
-        {
-          image: "pexels-alpyildizlar-14982155.jpg",
-          name: "Cheese Croissant",
-          price: "4.50",
-          details: "Butter, flour, yeast, sugar, salt, milk, cheddar cheese.",
-        },
-        {
-          image:
-            "pexels-raymond-petrik-1448389535-26832683.jpg",
-          name: " Almond Croissant",
-          price: "4.75",
-          details:
-            "Butter, flour, yeast, sugar, salt, milk, almond paste, sliced almonds.",
-        },
-      ];
+        let sandwichesArray = [
+            {
+                image: "pexels-jamalyahyayev-14519311.jpg",
+                name: "Butter Croissant",
+                price: "3.50",
+                details: "Butter, flour, yeast, sugar, salt, and milk",
+            },
+            {
+                image: "pexels-alpyildizlar-14982155.jpg",
+                name: "Cheese Croissant",
+                price: "4.50",
+                details: "Butter, flour, yeast, sugar, salt, milk, cheddar cheese.",
+            },
+            {
+                image: "pexels-raymond-petrik-1448389535-26832683.jpg",
+                name: "Almond Croissant",
+                price: "4.75",
+                details: "Butter, flour, yeast, sugar, salt, milk, almond paste, sliced almonds.",
+            },
+        ];
 
-      function renderItems() {
-        const drinksItems = document.getElementById("drinks-items");
-        const sandwichesItems = document.getElementById("sandwiches-items");
+        function renderItems() {
+            const drinksItems = document.getElementById("drinks-items");
+            const sandwichesItems = document.getElementById("sandwiches-items");
 
-        drinksItems.innerHTML = drinksArray
-          .map(
-            (item) => `
-                <li class="menu-item">
-                    <span class="item-image">
-                        <img src="${item.image}" alt="">
-                    </span>
-                    <span class="item-name">${item.name}</span>
-                    <span class="item-price">$${item.price}</span>
-                    <p>${item.details}</p>
-                </li>
-            `
-          )
-          .join("");
+            drinksItems.innerHTML = drinksArray
+                .map(
+                    (item) => `
+                        <li class="bg-white rounded-lg shadow-md p-4 transition-transform transform hover:scale-105">
+                            <span class="block mb-2">
+                                <img src="${item.image}" alt="${item.name}" class="w-24 h-24 rounded-full mx-auto">
+                            </span>
+                            <span class="block text-lg font-semibold text-brown-900">${item.name}</span>
+                            <span class="block text-md text-green-600 font-bold">$${item.price}</span>
+                            <p class="text-gray-700">${item.details}</p>
+                        </li>
+                    `
+                )
+                .join("");
 
-        sandwichesItems.innerHTML = sandwichesArray
-          .map(
-            (item) => `
-                <li class="menu-item">
-                    <span class="item-image">
-                        <img src="${item.image}" alt="">
-                    </span>
-                    <span class="item-name">${item.name}</span>
-                    <span class="item-price">$${item.price}</span>
-                    <p>${item.details}</p>
-                </li>
-            `
-          )
-          .join("");
-      }
-
-      function plusButtonDrinks() {
-        addItem.classList.remove("hidden");
-        sandwichesForm.classList.add("hidden");
-        drinksForm.classList.add("hidden");
-      }
-
-      function plusButtonSandwiches() {
-        addItem.classList.remove("hidden");
-        sandwichesForm.classList.add("hidden");
-        drinksForm.classList.add("hidden");
-      }
-
-      function exitForm() {
-        addItem.classList.add("hidden");
-        sandwichesForm.classList.remove("hidden");
-        drinksForm.classList.remove("hidden");
-      }
-
-      function addItemButtonClicked() {
-        const category = addedCategory.value.toLowerCase();
-        const itemPrice = addedItemPrice.value;
-        const itemName = addedItemName.value;
-        const itemDetails = addedItemDetails.value;
-        const file = addedImage.files[0];
-
-        if (file) {
-          const reader = new FileReader();
-
-          reader.onload = function (event) {
-            const newItem = {
-              image: event.target.result,
-              name: itemName,
-              price: itemPrice,
-              details: itemDetails,
-            };
-
-            if (category === "drinks") {
-              drinksArray.push(newItem);
-            } else if (category === "sandwiches") {
-              sandwichesArray.push(newItem);
-            }
-
-            // Re-render items after adding a new one
-            renderItems();
-
-            exitForm();
-            addedCategory.value = "";
-            addedItemPrice.value = "";
-            addedItemName.value = "";
-            addedItemDetails.value = "";
-          };
-
-          reader.readAsDataURL(file);
-        } else {
-          alert("Please upload an image");
+            sandwichesItems.innerHTML = sandwichesArray
+                .map(
+                    (item) => `
+                        <li class="bg-white rounded-lg shadow-md p-4 transition-transform transform hover:scale-105">
+                            <span class="block mb-2">
+                                <img src="${item.image}" alt="${item.name}" class="w-24 h-24 rounded-full mx-auto">
+                            </span>
+                            <span class="block text-lg font-semibold text-brown-900">${item.name}</span>
+                            <span class="block text-md text-green-600 font-bold">$${item.price}</span>
+                            <p class="text-gray-700">${item.details}</p>
+                        </li>
+                    `
+                )
+                .join("");
         }
-      }
 
-      // Initial render
-      renderItems();
+        function plusButtonDrinks() {
+            addItem.classList.remove("hidden");
+            sandwichesForm.classList.add("hidden");
+            drinksForm.classList.add("hidden");
+        }
+
+        function plusButtonSandwiches() {
+            addItem.classList.remove("hidden");
+            sandwichesForm.classList.add("hidden");
+            drinksForm.classList.add("hidden");
+        }
+
+        function exitForm() {
+            addItem.classList.add("hidden");
+            sandwichesForm.classList.remove("hidden");
+            drinksForm.classList.remove("hidden");
+        }
+
+        function addItemButtonClicked() {
+            const category = addedCategory.value.toLowerCase();
+            const itemPrice = addedItemPrice.value;
+            const itemName = addedItemName.value;
+            const itemDetails = addedItemDetails.value;
+            const file = addedImage.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+
+                reader.onload = function (event) {
+                    const newItem = {
+                        image: event.target.result,
+                        name: itemName,
+                        price: itemPrice,
+                        details: itemDetails,
+                    };
+
+                    if (category === "drinks") {
+                        drinksArray.push(newItem);
+                    } else if (category === "sandwiches") {
+                        sandwichesArray.push(newItem);
+                    }
+
+                    renderItems();
+                    exitForm();
+                    addedCategory.value = "";
+                    addedItemPrice.value = "";
+                    addedItemName.value = "";
+                    addedItemDetails.value = "";
+                };
+
+                reader.readAsDataURL(file);
+            } else {
+                alert("Please upload an image");
+            }
+        }
+
+        // Initial render
+        renderItems();
     </script>
-    <style>
-        /* General reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-}
-
-/* Page styling */
-body {
-    background-image: url('https://www.transparenttextures.com/patterns/concrete-wall.png');
-    background-color: #f8f1e4;
-    padding: 20px;
-    font-family: 'Open Sans', sans-serif;
-}
-
-.menu-container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 40px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-    border-radius: 20px;
-    position: relative;
-}
-
-/* Title Styling */
-.menu-title {
-    text-align: center;
-    font-size: 3em;
-    color: #3e2723;
-    margin-bottom: 30px;
-    font-weight: 700;
-    font-family: 'Playfair Display', serif;
-    letter-spacing: 3px;
-}
-
-/* Section Styling */
-.menu-section {
-    margin-bottom: 50px;
-    background-position: center;
-    background-size: cover;
-    border-radius: 15px;
-    padding: 20px;
-    position: relative;
-}
-
-#drinks-form {
-    background-image: url('./coffe-3-background.jpg');
-    background-size: cover;
-    background-position: center; /* Centers the image */
-    padding: 20px;
-}
-
-#sandwiches-form {
-    background-image: url('./pexels-pixabay-2135.jpg');
-    background-size: cover;
-    background-position: center; /* Centers the image */
-    padding: 20px;
-}
-
-.section-title {
-    font-size: 2em;
-    color: #3e2723;
-    border-bottom: 2px solid #d7ccc8;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
-    text-shadow: 1px 1px #d7ccc8;
-}
-
-/* Menu items list styling */
-.menu-items {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
-    padding: 0;
-    justify-content: space-around;
-}
-
-/* Individual menu item card styling */
-.menu-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color:transparent;
-    /* border: 1px solid #d7ccc8; */
-    padding: 20px;
-    border-radius: 15px;
-    width: 200px;
-    box-shadow: 0 4px 10px rgba(111, 78, 55, 0.1); 
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.menu-item:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
-    background-color: rgb(111, 78, 55, 0.3);
-}
-
-/* Item image styling */
-.menu-item img {
-    width: 100px;
-    height: 100px;
-    margin-bottom: 15px;
-    border-radius: 50%;
-    border: 2px solid #d7ccc8;
-}
-
-/* Item text styling */
-.item-name {
-    font-size: 1.4em;
-    color: #3e2723;
-    font-weight: bold;
-    margin-bottom: 10px;
-    text-align: center;
-}
-
-.item-price {
-    font-size: 1.3em;
-    color: #6d4c41;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.menu-item p {
-    font-size: 0.9em;
-    color: #5d4037;
-    text-align: center;
-}
-
-/* Button styling */
-button {
-    background-color: #6d4c41;
-    color: white;
-    cursor: pointer;
-    border: none;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    font-size: 1.5em;
-    margin: 0 auto 20px;
-    display: block;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #4e342e;
-}
-
-/* Form styling */
-.add-item-form {
-    max-width: 500px;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #333;
-    box-shadow: 2px 2px 12px #aaa;
-    position: absolute;
-    border-radius: 20px;
-    margin-top: 40px;
-    margin-left: 160px;
-}
-
-.exit-button {
-    /* background-color: #f44336; */
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    border-radius: 50%; 
-    width: 40px;
-    height: 40px;
-    position: absolute; 
-    top: 10px; 
-    right: 10px; 
-    display: flex;
-    align-items: center;
-}
-.exit-button:hover {
-    background-color: #d32f2f;
-}
-.input-label {
-    margin-top: 10px;
-    display: block;
-}
-.input-field {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-.input-row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-    gap: 10px;
-}
-.input-row .input-field {
-    flex: 1;
-    margin-right: 10px;
-}
-
-.custom-file-upload {
-    display: inline-block;
-    padding: 12px 24px;
-    cursor: pointer;
-    background-color: #777;
-    color: white;
-    border-radius: 6px;
-    font-size: 14px;
-    text-align: center;
-    transition: 0.3s ease;
-    margin-right: 50px;
-    margin-top: 16px;
-}
-
-.custom-file-upload:hover {
-    background-color: #555;
-}
-
-/* Hide the actual file input */
-#image-upload {
-    display: none;
-}
-
-
-.image-upload-div{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.add-button {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
-    border-radius: 5px;
-    width: 200px;
-    height: 50px;
-    margin: 0;
-    margin-left: 250px; 
-}
-.add-button:hover {
-    background-color: #45a049;
-}
-
-ul {
-    margin-top: 20px;
-    padding: 0;
-}
-li {
-    list-style-type: none;
-    margin-bottom: 10px;
-    border: 1px solid #eee;
-    padding: 10px;
-    border-radius: 5px;
-}
-
-.hidden{
-    display: none;
-}
-
-/* Responsive styling for mobile
-@media (max-width: 768px) {
-    .menu-items {
-        flex-direction: column;
-    }
-
-    .menu-item {
-        width: 100%;
-    }
-
-    .menu-container {
-        padding: 20px;
-    }
-
-    button {
-        margin-left: auto;
-    }
-} */
-    </style>
-  </body>
+</body>
 </html>
